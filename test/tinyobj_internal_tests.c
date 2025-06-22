@@ -138,15 +138,15 @@ void test_length_until_newline(void)
     }
 
     {
-        // Return value for null-terminated string without line breaks should be
-        // number of non-null chars.
+        // Return value for null-terminated string with trailing spaces should be
+        // number of non-null chars without number of trailing spaces.
         char test_string[] = "potato    ";
         TEST_CHECK(length_until_newline(test_string, sizeof(test_string)) == 6);
     }
 
     {
-        // Return value for null terminated string with a linebreak at the end should
-        // be number of chars to newline.
+        // Return value for null-terminated string with trailing spaces should be
+        // number of non-null chars without number of trailing spaces.
         char test_string[] = "potato \n";
         TEST_CHECK(length_until_newline(test_string, sizeof(test_string)) == 6);
     }
