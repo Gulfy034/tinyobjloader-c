@@ -83,6 +83,30 @@ void test_tinyobj_negative_exponent(void)
     }
 }
 
+void test_tinyobj_skip_whitespace(void)
+{
+    {
+        const char * filename = "fixtures/cube-trailing-space.obj";
+
+        tinyobj_shape_t * shape = NULL;
+        tinyobj_material_t * material = NULL;
+        tinyobj_attrib_t attrib;
+
+        unsigned long num_shapes;
+        unsigned long num_materials;
+
+        tinyobj_attrib_init(&attrib);
+
+        int result = tinyobj_parse_obj(&attrib, &shape, &num_shapes, &material, &num_materials, filename, loadFile, NULL, TINYOBJ_FLAG_TRIANGULATE);
+
+        TEST_CHECK(result == TINYOBJ_SUCCESS);
+
+        // TODO: should these two values be swapped?
+        TEST_CHECK(num_materials == 1);
+        TEST_CHECK(strcmp(material->name, "CubeMaterial") == 0);
+    }
+}
+
 void test_hash_table_infinity_loop(void)
 {
     hash_table_t table;
