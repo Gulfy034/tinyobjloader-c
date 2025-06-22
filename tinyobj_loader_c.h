@@ -1332,8 +1332,7 @@ static int parseLine(Command *command, const char *p, size_t p_len,
 
     command->object_name = p + (token - linebuf);
     command->object_name_len = (unsigned int)length_until_newline(
-                                                                  token, p_len - (size_t)(token - linebuf)) +
-      1;
+                                                                  token, (p_len - (size_t)(token - linebuf)) + 1);
     command->type = COMMAND_O;
 
     return 1;
