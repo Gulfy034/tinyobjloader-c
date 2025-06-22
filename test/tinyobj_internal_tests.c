@@ -136,6 +136,20 @@ void test_length_until_newline(void)
         char test_string[] = "pot\0ato";
         TEST_CHECK(length_until_newline(test_string, sizeof(test_string)) == 7);
     }
+
+    {
+        // Return value for null-terminated string with trailing spaces should be
+        // number of non-null chars without number of trailing spaces.
+        char test_string[] = "potato    ";
+        TEST_CHECK(length_until_newline(test_string, sizeof(test_string)) == 6);
+    }
+
+    {
+        // Return value for null-terminated string with trailing spaces should be
+        // number of non-null chars without number of trailing spaces.
+        char test_string[] = "potato \n";
+        TEST_CHECK(length_until_newline(test_string, sizeof(test_string)) == 6);
+    }
 }
 
 void test_num_lines(void) {
